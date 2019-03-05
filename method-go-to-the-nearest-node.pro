@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-03-05T14:42:55
+# Project created by QtCreator 2019-03-05T15:17:31
 #
 #-------------------------------------------------
 
@@ -26,13 +26,13 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        widget.cpp
 
 HEADERS += \
-        mainwindow.h
+        widget.h
 
 FORMS += \
-        mainwindow.ui
+        widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
