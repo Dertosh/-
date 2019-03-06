@@ -11,6 +11,12 @@ class Method : public QObject {
   explicit Method(short *mass, short size, short matrixSize,
                   QObject *parent = nullptr);
 
+  template <typename Iterator>
+  void bubble_sort(Iterator First, Iterator Last);
+
+  template <typename Iterator>
+  void sort(Iterator First, Iterator Last);
+
  signals:
   void printString(QString);
 
@@ -28,6 +34,7 @@ class Method : public QObject {
 
   QList<Ray> rays;
   void setRayList(short *mass, short size, short matrixSize);
+  QString getString(QList<Ray> rays);
 };
 
 #endif  // METHOD_H

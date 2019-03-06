@@ -22,13 +22,34 @@ void Method::setRayList(short *mass, short size, short matrixSize) {
       column++;
     }
   }
+
+  this->printString(getString(rays));
+
+  sort(rays.begin(), rays.end());
+
+  this->printString(getString(rays));
+}
+
+template <typename Iterator>
+void Method::bubble_sort(Iterator First, Iterator Last) {
+  while (First < --Last)
+    for (Iterator i = First; i < Last; ++i)
+      if (Ray(*(i + 1)).distance < Ray(*i).distance) std::iter_swap(i, i + 1);
+}
+
+template <typename Iterator>
+void Method::sort(Iterator First, Iterator Last) {
+  bubble_sort(First, Last);
+}
+
+QString Method::getString(QList<Ray> items) {
   QString str;
-  for (auto ray : rays) {
+  for (auto ray : items) {
     str += "{расстояние: " + QString::number(ray.distance) +
            ", узлы: " + QString::number(ray.firstNode) + ", " +
            QString::number(ray.secondNode) + "} ";
   }
-  this->printString(str);
+  return str;
 }
 
 void Method::process() {}
