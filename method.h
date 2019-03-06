@@ -1,6 +1,7 @@
 #ifndef METHOD_H
 #define METHOD_H
 
+#include <ray.h>
 #include <QLoggingCategory>
 #include <QObject>
 
@@ -26,15 +27,13 @@ class Method : public QObject {
   void process();
 
  private:
-  struct Ray {         // луч между узлами
-    short distance;    // растояние между узлами
-    short firstNode;   // начальный узел
-    short secondNode;  // конечный узел
-  };
-
-  QList<Ray> rays;
+  QList<Ray> _rays;
   void setRayList(short *mass, short size, short matrixSize);
   QString getString(QList<Ray> rays);
+  QList<Ray> getRoute(QList<Ray> rays, short size);
+  template <typename T>
+  void swap(T &a, T &b);
+  bool isIncluded(short Node, QList<Ray> rays);
 };
 
 #endif  // METHOD_H
