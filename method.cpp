@@ -21,10 +21,10 @@ void Method::setRayList(short *mass, short size, short matrixSize) {
     }
   }
 
-  this->printString("Начальная очередь");
+  /*this->printString("Начальная очередь");
   this->printString(getString(rays));
 
-  sort(rays.begin(), rays.end());
+  sort(rays.begin(), rays.end());*/
 
   this->printString("Отсортированная очередь");
   this->printString(getString(rays));
@@ -32,7 +32,11 @@ void Method::setRayList(short *mass, short size, short matrixSize) {
   QList<Ray> route = getRoute(rays, matrixSize);
 
   this->printString("Маршрут");
-  this->printString(getString(route));
+
+  // this->printString(getString(route));
+  this->printString(getRouteGraphString(route));
+  this->printString(getRouteString(route));
+  this->printString(getRouteSumString(route));
 }
 
 template <typename Iterator>
@@ -109,12 +113,12 @@ QList<Ray> Method::getRoute(QList<Ray> rays, short size) {
     }
   }
   QString str = "Проверка: ";
-  if (route.first().getFirstNode() == route.last().getSecondNode())
+  /*if (route.first().getFirstNode() == route.last().getSecondNode())
     str += QString::number(route.first().getFirstNode()) +
            " == " + QString::number(route.last().getSecondNode());
   else
     str += QString::number(route.first().getFirstNode()) +
-           " != " + QString::number(route.last().getSecondNode());
+           " != " + QString::number(route.last().getSecondNode());*/
   printString(str);
   return route;
 }
@@ -131,6 +135,32 @@ bool Method::isIncluded(short Node, QList<Ray> rays) {
     if (ray.getFirstNode() == Node || ray.getSecondNode() == Node) return true;
   }
   return false;
+}
+
+QString Method::getRouteGraphString(QList<Ray> rays) {
+  QString str = '(' + QString::number(rays.first().getFirstNode()) + ')';
+  for (auto ray : rays) {
+    str += "-(" + QString::number(ray.getSecondNode()) + ")";
+  }
+  return str;
+}
+
+QString Method::getRouteSumString(QList<Ray> rays) {
+  QString str = "L = " + QString::number(rays.first().getDistance());
+  short sum = 0;
+  for (auto ray : rays) {
+    str += " + " + QString::number(ray.getDistance());
+    sum += ray.getDistance();
+  }
+  return str;
+}
+
+QString Method::getRouteString(QList<Ray> rays) {
+  QString str = "S = " + QString::number(rays.first().getFirstNode());
+  for (auto ray : rays) {
+    str += " - " + QString::number(ray.getSecondNode());
+  }
+  return str;
 }
 
 void Method::process() {}

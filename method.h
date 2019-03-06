@@ -34,6 +34,9 @@ class Method : public QObject {
   template <typename T>
   void swap(T &a, T &b);
   bool isIncluded(short Node, QList<Ray> rays);
+  QString getRouteGraphString(QList<Ray> rays);
+  QString getRouteSumString(QList<Ray> rays);
+  QString getRouteString(QList<Ray> rays);
 };
 
 #endif  // METHOD_H
