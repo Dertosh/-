@@ -8,6 +8,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QMAKE_LFLAGS_RELEASE += -static -static-libgcc
+
 TARGET = method-go-to-the-nearest-node
 TEMPLATE = app
 
@@ -25,18 +27,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        widget.cpp \
+	main.cpp \
+	widget.cpp \
     method.cpp \
     ray.cpp
 
 HEADERS += \
-        widget.h \
+	widget.h \
     method.h \
     ray.h
 
 FORMS += \
-        widget.ui
+	widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

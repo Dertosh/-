@@ -3,6 +3,7 @@
 
 Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
   ui->setupUi(this);
+  this->setWindowTitle("Задача коммивояжёра");
 
   method = new Method();
   QThread::connect(method, SIGNAL(printString(QString)), ui->textBrowser,

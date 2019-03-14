@@ -21,20 +21,16 @@ void Method::setRayList(short *mass, short size, short matrixSize) {
     }
   }
 
-  /*this->printString("Начальная очередь");
-  this->printString(getString(rays));
-
-  sort(rays.begin(), rays.end());*/
-
-  this->printString("Отсортированная очередь");
+  this->printString(
+      "<h1>Алгоритм ближайшего соседа</h1>\nОтсортированная очередь\n");
   this->printString(getString(rays));
 
   QList<Ray> route = getRoute(rays, matrixSize);
 
-  this->printString("Маршрут");
+  this->printString("\nМаршрут");
 
-  // this->printString(getString(route));
   this->printString(getRouteGraphString(route));
+
   this->printString(getRouteString(route));
   this->printString(getRouteSumString(route));
 }
@@ -54,10 +50,12 @@ void Method::sort(Iterator First, Iterator Last) {
 QString Method::getString(QList<Ray> rays) {
   QString str;
   for (auto ray : rays) {
-    str += "{расстояние: " + QString::number(ray.getDistance()) +
-           ", узлы: " + QString::number(ray.getFirstNode()) + ", " +
-           QString::number(ray.getSecondNode()) + "} ";
+    str += "Q<sub>" + QString::number(ray.getFirstNode()) +
+           QString::number(ray.getSecondNode()) +
+           "</sub>=" + QString::number(ray.getDistance()) + ", ";
   }
+  str.resize(str.length() - 2);
+  str.append('.');
   return str;
 }
 
@@ -112,14 +110,7 @@ QList<Ray> Method::getRoute(QList<Ray> rays, short size) {
       break;
     }
   }
-  QString str = "Проверка: ";
-  /*if (route.first().getFirstNode() == route.last().getSecondNode())
-    str += QString::number(route.first().getFirstNode()) +
-           " == " + QString::number(route.last().getSecondNode());
-  else
-    str += QString::number(route.first().getFirstNode()) +
-           " != " + QString::number(route.last().getSecondNode());*/
-  printString(str);
+
   return route;
 }
 
@@ -152,6 +143,7 @@ QString Method::getRouteSumString(QList<Ray> rays) {
     str += " + " + QString::number(ray.getDistance());
     sum += ray.getDistance();
   }
+  str += " = " + QString::number(sum);
   return str;
 }
 
